@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Choose Game Mode</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Choose Game Mode</h1>
+
+    <div id="modeSelection">
+        <button onclick="startGame('regular')">Regular Mode</button>
+        <button onclick="startGame('timed')">Timed Mode</button>
+    </div>
+
+    <canvas id="gameCanvas" width="400" height="400" style="display: none;"></canvas>
+
+    <!-- Display Score & Level -->
+    <p id="scoreDisplay" style="display: none;">Score: 0</p>
+    <p id="levelDisplay" style="display: none;">Level: 1</p>
+    <p id="timerDisplay" style="display: none;">Time Left: 10s</p>
+
+    <!-- Custom Game Over Popup -->
+    <div id="gameOverPopup" class="popup">
+        <h2>Game Over</h2>
+        <button class="red-button" onclick="restartGame()">Restart</button>
+        <button class="red-button" onclick="goHome()">Home</button>
+    </div>
+
+    <script src="/js/game.js"></script>
+</body>
+</html>

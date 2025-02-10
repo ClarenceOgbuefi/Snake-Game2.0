@@ -1,0 +1,145 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #222;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+h1 {
+    font-size: 2.5em;
+    color: red;
+    margin-top: 20px;
+}
+
+/* Buttons */
+button {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px auto;
+    font-size: 1.2em;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+/* Forms */
+form {
+    background-color: #333;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.5);
+}
+
+input {
+    width: 90%;
+    padding: 8px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Leaderboard */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    font-size: 1.2em;
+    background-color: #444;
+    margin: 5px auto;
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Game Canvas */
+canvas {
+    display: block;
+    margin: 20px auto;
+    background-color: black;
+    border: 5px solid white;
+}
+
+/* Customization Page */
+input[type="color"] {
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Help Page */
+.scrollable-guide {
+    background-color: #444;
+    padding: 15px;
+    width: 60%;
+    margin: 20px auto;
+    height: 300px;
+    overflow-y: scroll;
+    border-radius: 5px;
+}
+
+/* Back Button */
+.back-button {
+    background-color: red;
+    width: 150px;
+}
+
+.back-button:hover {
+    background-color: darkred;
+}
+
+/* Game Over Popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+    text-align: center;
+    width: 300px;
+}
+
+.popup h2 {
+    color: white;
+    font-size: 2em;
+}
+
+/* Red Buttons for Game Over Popup */
+.red-button {
+    display: block;
+    width: 80%;
+    padding: 10px;
+    margin: 10px auto;
+    font-size: 1.2em;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.red-button:hover {
+    background-color: darkred;
+}
