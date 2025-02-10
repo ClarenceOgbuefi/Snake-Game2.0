@@ -47,11 +47,11 @@ app.post("/register", async (req, res) => {
     try {
         const hash = await bcrypt.hash(password, 10);
         const result = await db.query(
-            "INSERT INTO user_info (username, password) VALUES ($1, $2) RETURNING *",  // ✅ Fix: RETURNING * to get result
+            "INSERT INTO user_info (username, password) VALUES ($1, $2) RETURNING *",
             [username, hash]
         );
 
-        console.log("✅ New user registered:", result.rows[0]); // ✅ Now this will work
+        console.log("✅ New user registered:", result.rows[0]);
         res.json({ success: true, message: "Registration successful!" });
     } catch (err) {
         console.error("❌ Registration Error:", err);
@@ -90,6 +90,7 @@ app.post("/login", async (req, res) => {
 
         req.session.user = { id: user.id, username: user.username };
         console.log("✅ User logged in:", req.session.user);
+        goHome();
 
         res.json({ success: true, message: "Login successful!" });
 
@@ -204,6 +205,11 @@ app.get("/get_customization", async (req, res) => {
         res.status(500).json({ success: false, message: "Server error." });
     }
 });
+
+// Redirect to home page
+function goHome() {
+    window.location.href = "/";
+}
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
