@@ -11,6 +11,7 @@ let gameInterval = null; // Store the interval for the game loop
 let timerInterval = null; // Interval for counting down timer
 let obstacles = []; // Array to store obstacle positions
 
+// Function to pull user customizations from the server
 async function fetchCustomizations() {
     try {
         const response = await fetch("/get_customization");
@@ -235,11 +236,29 @@ function changeDirection(event) {
 }
 
 // Function to show Game Over popup
-function showGameOverPopup() {
+async function showGameOverPopup() {
     document.getElementById("gameOverPopup").style.display = "block";
     clearInterval(gameInterval); // Stop game loop
     clearInterval(timerInterval); // Stop timer
     gameRunning = false;
+
+    // Send high score update if user is logged in
+    try {
+        let response = await fetch("/update_score", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ mode: gameMode, score })
+        });
+
+        let data = await response.json();
+        if (data.success) {
+            console.log(`🏆 New high score saved: ${data.highScore}`);
+        } else {
+            console.log("ℹ️ Score was not high enough to update.");
+        }
+    } catch (error) {
+        console.error("❌ Error saving score:", error);
+    }
 }
 
 // Function to restart the game properly

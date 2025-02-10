@@ -1,3 +1,4 @@
+// Login functionality
 function handleLogin() {
     const username = document.getElementById("loginUsername").value;
     const password = document.getElementById("loginPassword").value;
@@ -16,6 +17,7 @@ function handleLogin() {
     .then(data => {
         if (data.success) {
             alert("Login successful!");
+            goHome();
             window.location.href = "/"; // Redirect to home page
         } else {
             alert(data.message);
@@ -24,6 +26,7 @@ function handleLogin() {
     .catch(error => console.error("Error:", error));
 }
 
+// Register a new user
 function handleRegister() {
     const username = document.getElementById("loginUsername").value;
     const password = document.getElementById("loginPassword").value;
@@ -49,6 +52,7 @@ function handleRegister() {
     .catch(error => console.error("Error:", error));
 }
 
+// Redirect to home page
 function goHome() {
     window.location.href = "/";
 }

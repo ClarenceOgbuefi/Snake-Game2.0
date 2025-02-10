@@ -27,7 +27,7 @@ app.use(
     })
 );
 
-// 🟢 Home Page
+// 🏠 Home Page
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/index.html");
 });
@@ -133,13 +133,24 @@ app.post("/update_score", async (req, res) => {
     const column = mode === "regular" ? "regular_score" : "timed_score";
 
     try {
-        console.log(`🔹 Updating score for ${req.session.user.username} in mode: ${mode}`);
-        await db.query(
-            `UPDATE user_info SET ${column} = GREATEST(${column}, $1) WHERE id = $2`,
-            [score, req.session.user.id]
-        );
-        console.log("✅ Score updated!");
-        res.json({ success: true, message: "Score updated!" });
+        console.log(`🔹 Checking high score for ${req.session.user.username} in mode: ${mode}`);
+
+        // Fetch current high score
+        const result = await db.query(`SELECT ${column} FROM user_info WHERE id = $1`, [req.session.user.id]);
+        let currentHighScore = result.rows[0] ? result.rows[0][column] : 0;
+
+        if (score > currentHighScore) {
+            console.log(`✅ New high score! Updating ${column} to ${score}`);
+            
+            await db.query(
+                `UPDATE user_info SET ${column} = $1 WHERE id = $2`,
+                [score, req.session.user.id]
+            );
+
+            return res.json({ success: true, message: "New high score saved!", highScore: score });
+        }
+
+        return res.json({ success: false, message: "Score not high enough to update." });
 
     } catch (err) {
         console.error("❌ Score Update Error:", err);
@@ -171,6 +182,7 @@ app.post("/customization", async (req, res) => {
     }
 });
 
+// 🎨 Get Customization
 app.get("/get_customization", async (req, res) => {
     if (!req.session.user) {
         return res.json({ success: false, message: "No user logged in." });

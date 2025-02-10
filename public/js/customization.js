@@ -1,3 +1,4 @@
+// Save user customization to the server
 async function saveCustomization() {
     let snakeColor = document.getElementById("snakeColor").value;
     let mapColor = document.getElementById("mapColor").value;
