@@ -15,9 +15,9 @@ function handleLogin() {
     })
     .then(response => response.json())
     .then(data => {
+        console.log("🔹 Server Response:", data); // Add this line to debug
         if (data.success) {
-            alert("Login successful!");
-            goHome();
+            alert("Login successful! Redirecting...");
             window.location.href = "/"; // Redirect to home page
         } else {
             alert(data.message);

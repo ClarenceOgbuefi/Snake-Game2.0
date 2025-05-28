@@ -171,14 +171,34 @@ function generateObstacles() {
     obstacles = []; // Clear old obstacles
     let numObstacles = level * 2; // Increase obstacles every level
 
+    let safeDistance = 60; // Minimum distance from the snake's head
+
     for (let i = 0; i < numObstacles; i++) {
         let newObstacle;
+        let attempts = 0;
+        let maxAttempts = 50; // Prevent infinite loops
+
         do {
             newObstacle = getRandomPosition();
-        } while (isPositionOccupied(newObstacle));
+            attempts++;
+        } while (
+            isPositionOccupied(newObstacle) || 
+            isNearSnake(newObstacle, safeDistance) &&
+            attempts < maxAttempts
+        );
 
-        obstacles.push(newObstacle);
+        if (attempts < maxAttempts) {
+            obstacles.push(newObstacle);
+        }
     }
+}
+
+// Helper function to check if obstacle is near the snake
+function isNearSnake(position, distance) {
+    return snake.some(part => 
+        Math.abs(part.x - position.x) < distance && 
+        Math.abs(part.y - position.y) < distance
+    );
 }
 
 // Function to start the timer countdown

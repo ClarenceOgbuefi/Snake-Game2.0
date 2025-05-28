@@ -1,2 +1,3 @@
 # Ignore environment variables (API keys, passwords)
 .env
+terraform

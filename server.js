@@ -90,9 +90,8 @@ app.post("/login", async (req, res) => {
 
         req.session.user = { id: user.id, username: user.username };
         console.log("✅ User logged in:", req.session.user);
-        goHome();
 
-        res.json({ success: true, message: "Login successful!" });
+        res.json({ success: true, message: "Login successful!", redirectUrl: "/" });
 
     } catch (err) {
         console.error("❌ Login Error:", err);
@@ -205,11 +204,6 @@ app.get("/get_customization", async (req, res) => {
         res.status(500).json({ success: false, message: "Server error." });
     }
 });
-
-// Redirect to home page
-function goHome() {
-    window.location.href = "/";
-}
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
